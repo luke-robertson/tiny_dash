@@ -182,15 +182,17 @@ describe('betterDash', () => {
       const calc = base.map(item => get(item[0], item[1]))
       const expected = ['1', 'yes', 'data']
       assert.deepEqual(calc, expected)
+    })
 
     it('should return value of key in array', () => {
       const base = [
-        [[1,2,3,4], '0'],
-        [[100,200,300], [1]],
-        [[55,66,77], '2']
+        [[1, 2, 3, 4], '0'],
+        [[100, 200, 300], [1]],
+        [[55, 66, 77], '2']
       ]
       const calc = base.map(item => get(item[0], item[1]))
-      const expected = ['1', '200', '66']
+      const expected = [1, 200, 77]
       assert.deepEqual(calc, expected)
-    })  })
+    })
+  })
 })
