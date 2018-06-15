@@ -10,7 +10,8 @@ const {
   isNumber,
   isArray,
   isFalsy,
-  size
+  size,
+  keys
 } = require('../index.js')
 
 const assert = require('assert')
@@ -141,10 +142,18 @@ describe('betterDash', () => {
       const expected = [4, 0, 1, 2]
       assert.deepEqual(calc, expected)
     })
-    it('should return undefined if no size', () => {
-      const base = [undefined, null, {}, '']
+    it('should return 0 if no size', () => {
+      const base = [undefined, null, [], '']
       const calc = base.map(size)
-      const expected = [undefined, undefined, undefined, undefined]
+      const expected = [0, 0, 0, 0]
+      assert.deepEqual(calc, expected)
+    })
+  })
+  describe('keys()', () => {
+    it('should return keys of object', () => {
+      const base = [{ 123: 'test', data: '123' }]
+      const calc = base.map(keys)
+      const expected = [['123', 'data']]
       assert.deepEqual(calc, expected)
     })
   })

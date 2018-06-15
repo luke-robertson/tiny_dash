@@ -54,11 +54,13 @@ const last = data => {
   return getIndex(data, size(data) - 1)
 }
 
-const getIndex = (item, index = 0) => item[index]
-
 const size = item => (item ? item.length : 0)
 
 const keys = item => (item ? Object.keys(item) : [])
+
+// none public functions
+
+const getIndex = (item, index = 0) => item[index]
 
 module.exports = {
   times,
@@ -72,5 +74,6 @@ module.exports = {
   isNumber,
   isArray,
   isFalsy,
-  size
+  size,
+  keys
 }
