@@ -10,6 +10,7 @@ const {
   isNumber,
   isArray,
   isFalsy,
+  isString,
   size,
   keys
 } = require('../index.js')
@@ -95,7 +96,7 @@ describe('betterDash', () => {
   })
   describe('isNumber()', () => {
     it('should return true if number', () => {
-      const base = [123, 555, 777, 00]
+      const base = [123, 555, 777, 0]
       const calc = base.map(isNumber)
       const expected = [true, true, true, true]
       assert.deepEqual(calc, expected)
@@ -135,6 +136,20 @@ describe('betterDash', () => {
       assert.deepEqual(calc, expected)
     })
   })
+  describe('isString()', () => {
+    it('should return true if string', () => {
+      const base = ['123', 'test', 'face', '']
+      const calc = base.map(isString)
+      const expected = [true, true, true, true]
+      assert.deepEqual(calc, expected)
+    })
+    it('should return false if not string', () => {
+      const base = [123, {}, undefined, []]
+      const calc = base.map(isString)
+      const expected = [false, false, false, false]
+      assert.deepEqual(calc, expected)
+    })
+  })
   describe('size()', () => {
     it('should return size of array', () => {
       const base = [[1, 2, 3, 4], [], [[]], [{}, {}]]
@@ -157,4 +172,25 @@ describe('betterDash', () => {
       assert.deepEqual(calc, expected)
     })
   })
+  describe('get()', () => {
+    it('should return value of key in object', () => {
+      const base = [
+        [{ data: { value: '1' } }, 'data.value'],
+        [{ face: { value: 'yes' } }, 'face.value'],
+        [{ face: { value: 'data' } }, ['face', 'value']]
+      ]
+      const calc = base.map(item => get(item[0], item[1]))
+      const expected = ['1', 'yes', 'data']
+      assert.deepEqual(calc, expected)
+
+    it('should return value of key in array', () => {
+      const base = [
+        [[1,2,3,4], '0'],
+        [[100,200,300], [1]],
+        [[55,66,77], '2']
+      ]
+      const calc = base.map(item => get(item[0], item[1]))
+      const expected = ['1', '200', '66']
+      assert.deepEqual(calc, expected)
+    })  })
 })

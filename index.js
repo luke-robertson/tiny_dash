@@ -4,7 +4,16 @@ const flatMap = () => {}
 
 const clone = () => {}
 
-const get = () => {}
+const get = (data, target) => {
+  if (isFalsy(data)) {
+    return undefined
+  }
+  if (isArray(data)) {
+    return getIndex(data, target)
+  }
+  const path = isString(target) ? target.split('.') : target
+  return path.reduce((acc, key) => (acc && acc[key] ? acc[key] : null), data)
+}
 
 const random = (min = 0, max = 1) => Math.random() * (max - min) + min
 
@@ -12,6 +21,8 @@ const isObject = data =>
   typeof data === 'object' && !Array.isArray(data) && data !== null
 
 const isNumber = data => Number.isInteger(data)
+
+const isString = data => typeof data === 'string' || data instanceof String
 
 const isArray = data => Array.isArray(data)
 
@@ -74,6 +85,7 @@ module.exports = {
   isNumber,
   isArray,
   isFalsy,
+  isString,
   size,
   keys
 }
