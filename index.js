@@ -41,6 +41,17 @@ const get = (data, target) => {
   return path.reduce((acc, key) => (acc && acc[key] ? acc[key] : null), data)
 }
 
+const group = (data, key) =>
+  isArray(data)
+    ? data.reduce(
+        (acc, item) =>
+          Object.assign(acc, {
+            [item[key]]: (acc[item[key]] || []).concat(item)
+          }),
+        {}
+      )
+    : undefined
+
 const includes = (data = [], string = '') => data.indexOf(string) !== -1
 
 const isArray = data => Array.isArray(data)
@@ -77,7 +88,21 @@ const last = data => {
   return getIndex(data, size(data) - 1)
 }
 
-const random = (min = 0, max = 1) => Math.random() * (max - min) + min
+const random = (min = 0, max = 1) =>
+  min === 0 && max === 1
+    ? Math.random() * (max - min) + min
+    : Math.floor(Math.random() * (max - min) + min)
+
+const sample = (arr, length = false) => {
+  if (length) {
+    const final = []
+    times(length, () => {
+      final.push(arr.splice(random(0, size(arr)), 1))
+    })
+    return flatten(final)
+  }
+  return getIndex(arr, random(0, size(arr)))
+}
 
 const size = item => (item ? item.length : 0)
 
@@ -89,13 +114,9 @@ const sum = arr => (arr ? arr.reduce((acc, int) => acc + int, 0) : undefined)
 
 const times = (times = 1, cb = () => {}) => {
   for (let i = 0; i < times; i++) {
-    return cb()
+    cb()
   }
 }
-
-const group = () => {}
-
-const sample = () => {}
 
 const date = () => {}
 
@@ -113,6 +134,7 @@ module.exports = {
   flatten,
   flattenDeep,
   get,
+  group,
   includes,
   isArray,
   isFalsy,
@@ -122,6 +144,7 @@ module.exports = {
   keys,
   last,
   random,
+  sample,
   size,
   sortInt,
   sortStr,
