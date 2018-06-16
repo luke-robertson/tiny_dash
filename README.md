@@ -220,7 +220,6 @@ times(3, x += 1)
 y = 3
 ```
 
-```
 ## Authors
 
 * **Luke Robertson** - [DesignAlchemy](https://github.com/designalchemy/)
@@ -228,4 +227,3 @@ y = 3
 ## License
 
 Public
-```
