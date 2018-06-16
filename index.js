@@ -30,8 +30,6 @@ const flattenDeep = data =>
       )
     : undefined
 
-const flatMap = () => {}
-
 const get = (data, target) => {
   if (isFalsy(data)) {
     return undefined
@@ -43,8 +41,7 @@ const get = (data, target) => {
   return path.reduce((acc, key) => (acc && acc[key] ? acc[key] : null), data)
 }
 
-const includes = (data, string) =>
-  data ? data.indexOf(string) !== -1 : undefined
+const includes = (data = [], string = '') => data.indexOf(string) !== -1
 
 const isArray = data => Array.isArray(data)
 
@@ -84,7 +81,25 @@ const random = (min = 0, max = 1) => Math.random() * (max - min) + min
 
 const size = item => (item ? item.length : 0)
 
-const times = () => {}
+const sortInt = arr => arr.sort((a, b) => a - b)
+
+const sortStr = arr => arr.sort((a, b) => a.localeCompare(b))
+
+const sum = arr => (arr ? arr.reduce((acc, int) => acc + int, 0) : undefined)
+
+const times = (times = 1, cb = () => {}) => {
+  for (let i = 0; i < times; i++) {
+    return cb()
+  }
+}
+
+const group = () => {}
+
+const sample = () => {}
+
+const date = () => {}
+
+const flatMap = () => {}
 
 // none public functions
 
@@ -108,5 +123,8 @@ module.exports = {
   last,
   random,
   size,
+  sortInt,
+  sortStr,
+  sum,
   times
 }
