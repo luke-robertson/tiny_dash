@@ -58,7 +58,7 @@ const isFalsy = data =>
 const isNumber = data => Number.isInteger(data)
 
 const isObject = data =>
-  typeof data === 'object' && !Array.isArray(data) && data !== null
+  typeof data === 'object' && !isArray(data) && !isFalsy(data)
 
 const isString = data => typeof data === 'string' || data instanceof String
 
