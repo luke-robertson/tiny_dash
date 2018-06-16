@@ -120,8 +120,6 @@ const times = (times = 1, cb = () => {}) => {
 
 const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), [])
 
-// none public functions
-
 const getIndex = (item, index = 0) => item[index]
 
 module.exports = {
