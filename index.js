@@ -118,9 +118,7 @@ const times = (times = 1, cb = () => {}) => {
   }
 }
 
-const date = () => {}
-
-const flatMap = () => {}
+const flatMap = (f, xs) => xs.reduce((acc, x) => acc.concat(f(x)), [])
 
 // none public functions
 
