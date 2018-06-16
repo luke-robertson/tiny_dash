@@ -19,12 +19,10 @@ const first = data => {
 }
 
 const flatten = data =>
-  isArray(data) || isObject(data)
-    ? data.reduce((acc, val) => acc.concat(val), [])
-    : undefined
+  isArray(data) ? data.reduce((acc, val) => acc.concat(val), []) : undefined
 
 const flattenDeep = data =>
-  isArray(data) || isObject(data)
+  isArray(data)
     ? data.reduce(
         (acc, val) =>
           isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
@@ -57,10 +55,10 @@ const isFalsy = data =>
   data === 0 ||
   data === ''
 
+const isNumber = data => Number.isInteger(data)
+
 const isObject = data =>
   typeof data === 'object' && !Array.isArray(data) && data !== null
-
-const isNumber = data => Number.isInteger(data)
 
 const isString = data => typeof data === 'string' || data instanceof String
 
